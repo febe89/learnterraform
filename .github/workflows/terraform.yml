@@ -37,7 +37,9 @@ jobs:
         run: terraform plan
 
       - name: Terraform Apply
+        run: terraform apply -auto-approve -lock=false
+
+      - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve
-      - name: Terraform Apply
-        run: terraform apply -auto-approve -lock=false
+      
