@@ -28,18 +28,13 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-        
-
       - name: Terraform Validate
         run: terraform validate
 
       - name: Terraform Plan
         run: terraform plan
 
-      - name: Terraform Apply
-        run: terraform apply -auto-approve -lock=false
-
+      # FIXED: Combined into a single step with the -lock=false flag added at the end
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve
-      
+        run: terraform apply -auto-approve -lock=false
