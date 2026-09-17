@@ -28,6 +28,8 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
+        
+
       - name: Terraform Validate
         run: terraform validate
 
@@ -37,3 +39,5 @@ jobs:
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -lock=false
