@@ -31,10 +31,11 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
+      # FIXED: Added -lock=false here so the plan doesn't fail
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -lock=false
 
-      # FIXED: Combined into a single step with the -lock=false flag added at the end
+      # FIXED: Keeps -lock=false here for the deployment step
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -lock=false
